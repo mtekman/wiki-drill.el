@@ -36,7 +36,7 @@
 
 
 ;; -- FlashCard buffer
-(defcustom wiki-drill--flashcardbuffer "*FlashCard*"
+(defvar wiki-drill--flashcardbuffer "*FlashCard*"
   "Buffer name for flashcard")
 (defun wiki-drill/get-flashcard-buffer ()
   "Returns (and creates) the flashcard buffer"
@@ -46,7 +46,7 @@
 
 
 ;; --- Clozer Flashcard Functions
-(defcustom wiki-drill--custom-clozer '("test")
+(defcustom wiki-drill--custom-clozer '()
   "A list of custom clozer types provided by the user")
 (defun wiki-drill/offer-flashcard-choices ()
   "Offers a choice of categories to the user"
@@ -159,5 +159,6 @@
   (wiki-drill/make-flash subject))
 
 
-(wiki-drill "Lawton railway station")
+;; -- Tests --
+;; (wiki-drill "Lawton railway station")
 ;; (wiki-drill "RNA")
