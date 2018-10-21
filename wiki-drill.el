@@ -11,7 +11,7 @@
 ;;; Commentary:
 
 ;; Often when one skims over a wikipedia article, the information remembered in
-;; the short time span is not preserved. This package uses Danny Gratzer's
+;; the short time span is not preserved.  This package uses Danny Gratzer's
 ;; excellent wiki-summary tool and converts the output into drill format.
 
 ;; To use this package, simply call M-x wiki-drill (or bind it to a key).
@@ -19,19 +19,21 @@
 
 (require 'wiki-summary)
 
+;;; Code:
+
 (setq wiki-drill--tmp-subject nil)
 (setq wiki-drill--tmp-type nil)
 
 ;; --- File operations
 (defcustom wiki-drill--file "~/wiki-drill-inputs.org"
-  "File to temprarily store drill entries. It is then up to the user to refile these entries.")
+  "File to temprarily store drill entries, where it is then up to the user to refile these entries.")
 
 ;; -- FlashCard buffer
 (defvar wiki-drill--flashcardbuffer "*FlashCard*"
-  "Buffer name for flashcard")
+  "Buffer name for flashcard.")
 
 (defun wiki-drill-get-flashcard-buffer ()
-  "Returns (and creates) the flashcard buffer"
+  "Generate (and create) the flashcard buffer."
   (if (get-buffer wiki-drill--flashcardbuffer)
       (get-buffer wiki-drill--flashcardbuffer)
     (generate-new-buffer wiki-drill--flashcardbuffer)))
@@ -39,10 +41,10 @@
 
 ;; --- Clozer Flashcard Functions
 (defcustom wiki-drill--custom-clozer '()
-  "A list of custom clozer types provided by the user")
+  "A list of custom clozer types provided by the user.")
 
 (defun wiki-drill-offer-flashcard-choices ()
-  "Offers a choice of categories to the user"
+  "Offer a choice of categories to the user."
   (let ((choices
          (append
           '("simple"
@@ -59,7 +61,7 @@
            (ido-completing-read "Clozer Types:" choices))))
 
 (defun wiki-drill-make-flash-clozer-usertext ()
-  "Pull text from wiki-summary into FlashCard, let the user mark words"
+  "Pull text from 'wiki-summary' into FlashCard, let the user mark words."
   (let* ((flashbuff (wiki-drill-get-flashcard-buffer)))
     (sit-for 0.1)
     (with-current-buffer "*wiki-summary*"
@@ -77,7 +79,7 @@
                (wiki-drill-clozer-mode 1))))))
 
 (defun wiki-drill-make-flash (subject)
-  "Offer the user flashcard"
+  "Offer the user flashcard for SUBJECT of choice."
   (let* ((flash-type (wiki-drill-offer-flashcard-choices)))
     (setq wiki-drill--tmp-subject subject)
     (setq wiki-drill--tmp-type flash-type)
@@ -86,13 +88,13 @@
 
 ;; --- Clozer Mode Functions --
 (defcustom wiki-drill--binding-clozer-mark "C-b"
-  "Binding to mark words or phrases in clozer minor mode")
+  "Binding to mark words or phrases in clozer minor mode.")
 
 (defcustom wiki-drill--binding-submit "C-c C-c"
-  "Binding to submit flashcard")
+  "Binding to submit flashcard.")
 
 (defun wiki-drill-clozer-brackets ()
-  "Surrounds with [[words||hint]]"
+  "Surrounds with [[words||hint]]."
   (let (pos1 pos2 bds)
     (if (use-region-p)
         (setq pos1 (region-beginning) pos2 (region-end))
@@ -104,7 +106,7 @@
     (goto-char (+ pos2 4))))
 
 (define-minor-mode wiki-drill-clozer-mode
-  "Toggles clozer bracketing mode"
+  "Toggles clozer bracketing mode."
   :init-value nil
   :lighter " clozer"
   :keymap (let ((map (make-sparse-keymap)))
@@ -117,13 +119,13 @@
 
 ;; --- Submitting a flashcard
 (defun wiki-drill-refile-into-file (text)
-  "Refile into text"
+  "Refile TEXT into inbox file."
   (progn (if (not (file-exists-p wiki-drill--file))
              (write-region "" nil wiki-drill--file))
          (write-region text nil wiki-drill--file 'append)))
 
 (defun wiki-drill-total-text (subject type body)
-  "Put together the header and body"
+  "Place the BODY and TYPE under the SUBJECT."
   (format "\
 * %s     :drill:
    :PROPERTIES:
@@ -135,7 +137,7 @@
 " subject type body))
 
 (defun wiki-drill-get-flashcard-text ()
-  "Get non-commented text from FlashCard buffer"
+  "Get non-commented text from FlashCard buffer."
   (with-current-buffer (wiki-drill-get-flashcard-buffer)
     (save-restriction
       (widen)
@@ -145,12 +147,12 @@
        (point-max)))))
 
 (defun wiki-drill-kill-all-buffers ()
-  "Kill buffers related to wiki-summary and FlashCard"
+  "Kill buffers related to 'wiki-summary' and FlashCard."
   (when (get-buffer "*wiki-summary*") (kill-buffer "*wiki-summary*"))
   (when (get-buffer "*FlashCard*" ) (kill-buffer "*FlashCard*")))
 
 (defun wiki-drill-clozer-submit ()
-  "Pulls text from Flashcard and calls refiler"
+  "Pulls text from Flashcard buffer and then call the refiler."
   (let* ((user-text (wiki-drill-get-flashcard-text))
          (total-text (wiki-drill-total-text
                       wiki-drill--tmp-subject
@@ -161,6 +163,7 @@
            (switch-to-buffer (find-file wiki-drill--file)))))
 
 (defun wiki-drill (subject)
+  "Generate 'org-drill' notes from 'wiki-summary' SUBJECT snippets."
   (wiki-summary subject)
   (wiki-drill-kill-all-buffers)
   (wiki-drill-make-flash subject))
