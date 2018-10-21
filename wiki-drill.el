@@ -26,7 +26,9 @@
 
 ;; --- File operations
 (defcustom wiki-drill--file "~/wiki-drill-inputs.org"
-  "File to temprarily store drill entries, where it is then up to the user to refile these entries.")
+  "File to temprarily store drill entries, where it is then up to the user to refile these entries."
+  :type 'string
+  :group 'wiki-drill)
 
 ;; -- FlashCard buffer
 (defvar wiki-drill--flashcardbuffer "*FlashCard*"
@@ -41,7 +43,9 @@
 
 ;; --- Clozer Flashcard Functions
 (defcustom wiki-drill--custom-clozer '()
-  "A list of custom clozer types provided by the user.")
+  "A list of custom clozer types provided by the user."
+  :type 'array
+  :group 'wiki-drill)
 
 (defun wiki-drill-offer-flashcard-choices ()
   "Offer a choice of categories to the user."
@@ -88,10 +92,14 @@
 
 ;; --- Clozer Mode Functions --
 (defcustom wiki-drill--binding-clozer-mark "C-b"
-  "Binding to mark words or phrases in clozer minor mode.")
+  "Binding to mark words or phrases in clozer minor mode."
+  :type 'string
+  :group 'wiki-drill)
 
 (defcustom wiki-drill--binding-submit "C-c C-c"
-  "Binding to submit flashcard.")
+  "Binding to submit flashcard."
+  :type 'string
+  :group 'wiki-drill)
 
 (defun wiki-drill-clozer-brackets ()
   "Surrounds with [[words||hint]]."
