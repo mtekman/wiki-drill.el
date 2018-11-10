@@ -62,7 +62,7 @@
           wiki-drill--custom-clozer)))
     (progn (sit-for 1)
            (select-frame-set-input-focus (window-frame (active-minibuffer-window)))
-           (completing-read "Clozer Types:" choices))))
+           (completing-read "Clozer Types: " choices))))
 
 ;;;###autoload
 (defun wiki-drill-make-flash-clozer-usertext ()
