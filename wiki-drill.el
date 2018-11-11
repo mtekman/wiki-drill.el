@@ -5,7 +5,7 @@
 ;; Author: Mehmet Tekman
 ;; URL: https://github.com/mtekman/wiki-drill.el
 ;; Keywords: outlines
-;; Package-Requires: ((emacs "24"))
+;; Package-Requires: ((emacs "24") (wiki-summary "0"))
 ;; Version: 0.1
 
 ;;; Commentary:
