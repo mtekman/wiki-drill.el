@@ -17,10 +17,10 @@
 ;; To use this package, simply call M-x wiki-drill (or bind it to a key).
 ;; This will prompt you for an article title to search, where you can then
 ;; specify a wikipedia topic of choice, as well as a flashcard clozer type
-;; (as given by org-drill options). A new buffer window will present itself
+;; (as given by org-drill options).  A new buffer window will present itself
 ;; with the summary for that wikipiedia article, and instructions on how to
 ;; mark the text that you wish to obscure will appear in the comments in the
-;; buffer. Once you have completed marking the text, you can then submit
+;; buffer.  Once you have completed marking the text, you can then submit
 ;; your changes which will be refiled into the wiki-drill-file of your choice
 
 (require 'wiki-summary)
