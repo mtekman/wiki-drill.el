@@ -1,8 +1,8 @@
 ## wiki-drill.el
 
-*** This repo has migrated to GitLab
+### This repo has migrated to GitLab
 https://gitlab.com/mtekman/wiki-drill.el
-****** (The copy here is archived. Please see the above link for the latest developments)
+###### (The copy here is archived. Please see the above link for the latest developments)
 
 ********
 
