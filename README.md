@@ -1,5 +1,13 @@
 ## wiki-drill.el
 
+*** This repo has migrated to GitLab
+https://gitlab.com/mtekman/wiki-drill.el
+****** (The copy here is archived. Please see the above link for the latest developments)
+
+********
+
+
+
 [![MELPA](http://melpa.org/packages/wiki-drill-badge.svg)](http://melpa.org/#/wiki-drill)
 
 Use the Wikipedia summaries from jozefg's [wiki-summary](https://github.com/jozefg/wiki-summary.el) package and generates 
